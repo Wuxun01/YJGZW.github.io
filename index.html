@@ -223,6 +223,40 @@ const fmt = v => v.toLocaleString('zh-CN');
 const delta = v => (v>0?'+':'')+v.toLocaleString('zh-CN');
 const tooltipStyle = {backgroundColor:'rgba(26,54,93,.92)',padding:12,cornerRadius:8,titleFont:{size:13},bodyFont:{size:12}};
 
+/* 成效排行图数值标签插件
+   chartjs-plugin-datalabels 2.2.0 在横向条形图(indexAxis:'y')存在兼容问题，
+   标签的 origin.y 会被置为 null 导致标签无法渲染。此处用原生 canvas 绘制标签，100% 可靠。 */
+const deltaLabelPlugin = {
+  id:'deltaLabel',
+  afterDatasetsDraw(chart){
+    const meta=chart.getDatasetMeta(0);
+    if(!meta||!meta.data||!meta.data.length)return;
+    const vals=chart.data.datasets[0].data||[];
+    const ctx=chart.ctx;
+    ctx.save();
+    ctx.font='600 11px "Microsoft YaHei","Segoe UI",sans-serif';
+    ctx.textBaseline='middle';
+    meta.data.forEach((bar,i)=>{
+      if(bar.skip)return;
+      const v=vals[i];
+      if(v===0){
+        /* 0 值：灰色短标记 + "0" 标签 */
+        ctx.fillStyle='#a0aec0';
+        ctx.fillRect(bar.base-4, bar.y+bar.height/2-1, 4, 2);
+        ctx.fillStyle='#888';
+        ctx.textAlign='right';
+        ctx.fillText('0', bar.base-9, bar.y+bar.height/2);
+        return;
+      }
+      /* 非 0 值：深色数值标签，贴条形左端外侧 */
+      ctx.fillStyle='#333';
+      ctx.textAlign='right';
+      ctx.fillText(v.toLocaleString('zh-CN'), bar.x-6, bar.y+bar.height/2);
+    });
+    ctx.restore();
+  }
+};
+
 /* ================= 主对象 ================= */
 const D = {
   metric:'zhi',
@@ -424,12 +458,11 @@ const D = {
 
     if(this.charts.delta){this.charts.delta.destroy();}
     this.charts.delta=new Chart($('delta-chart'),{type:'bar',
+      plugins:[deltaLabelPlugin],
       data:{labels,datasets:[{data:vals,backgroundColor:bgColor,borderRadius:3,borderWidth:isSel.map(s=>s?2:0),borderColor:bgColor,barPercentage:0.8,categoryPercentage:0.85}]},
       options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
         plugins:{legend:{display:false},
-          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.parsed.y>0?'+':''}${c.parsed.y.toLocaleString()} 个`}},
-          datalabels:{anchor:'end',align:'end',font:{size:11,weight:'bold'},
-            color:'#333',offset:4,clip:false,formatter:v=>v!==0?v.toLocaleString('zh-CN'):''}},
+          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.parsed.x>0?'+':''}${c.parsed.x.toLocaleString()} 个`}}},
         scales:{x:{beginAtZero:true,grid:{display:false},ticks:{callback:v=>v.toLocaleString()}},y:{grid:{display:false},ticks:{font:{size:12}}}}
       }
     });
