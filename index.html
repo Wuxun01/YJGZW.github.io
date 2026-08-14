@@ -111,7 +111,7 @@ tbody tr.highlight:hover{background:#e1f0fe}
   <header class="header">
     <div>
       <h1>账外工程整改工作数据看板</h1>
-      <div class="sub">数据期间：2026年7月31日 — 8月13日 · 口径：账外预告警 + 疑似已账外且未立项（整改指标）</div>
+      <div class="sub">数据期间：2026年7月31日 — 8月14日 · 口径：账外预告警 + 疑似已账外且未立项（整改指标）</div>
     </div>
     <div class="filters">
       <div class="filter-group">
@@ -156,14 +156,14 @@ tbody tr.highlight:hover{background:#e1f0fe}
 
   <section class="chart-row chart-row-full">
     <div class="chart-card">
-      <h3 id="branch-title">分公司整改指标（7月31日 / 8月7日 / 8月13日）<span class="hint">按8月13日降序 · 右侧标注当前值</span></h3>
+      <h3 id="branch-title">分公司整改指标（7月31日 / 8月7日 / 8月14日）<span class="hint">按8月14日降序 · 右侧标注当前值</span></h3>
       <div class="chart-box chart-box-tall"><canvas id="branch-chart"></canvas></div>
     </div>
   </section>
 
   <section class="chart-row chart-row-full">
     <div class="chart-card">
-      <h3 id="delta-title">一周整改成效排行（8月7日 → 8月13日 变化）</h3>
+      <h3 id="delta-title">一周整改成效排行（8月7日 → 8月14日 变化）</h3>
       <div class="chart-box chart-box-mid"><canvas id="delta-chart"></canvas></div>
       <div class="legend-note">绿色为压降成效（负值=下降），红色为指标上升单位。</div>
     </div>
@@ -174,48 +174,46 @@ tbody tr.highlight:hover{background:#e1f0fe}
     <div style="overflow-x:auto"><table id="data-table"><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div>
   </section>
 
-  <div class="footer">数据来源：账外工程明细（7月31日 / 8月7日 / 8月13日） · 生成时间：2026年8月14日</div>
+  <div class="footer">数据来源：账外工程明细（7月31日 / 8月7日 / 8月14日） · 生成时间：2026年8月14日</div>
 </div>
 
 <script>
 /* ================= 数据 ================= */
-const DATES = ['7月31日','8月7日','8月13日'];
+const DATES = ['7月31日','8月7日','8月14日'];
 const OVERALL = [
   {date:'7月31日', warn:628, now:1472, notset:1645, zhi:2273},
-  {date:'8月7日',  warn:499, now:1290, notset:1029, zhi:1528},
-  {date:'8月13日', warn:412, now:1306, notset:710,  zhi:1122}
+  {date:'8月7日',  warn:526, now:1290, notset:1119, zhi:1645},
+  {date:'8月14日', warn:392, now:1306, notset:720,  zhi:1112}
 ];
 /* 分公司: d=[[告警,已立项,未立项], ...三期] */
 const BRANCHES = [
-  {name:'襄阳', d:[[103,269,204],[105,269,176],[85,288,30]]},
-  {name:'十堰', d:[[26,2,106],[15,2,79],[1,1,12]]},
-  {name:'宜昌', d:[[57,111,108],[32,115,51],[0,112,9]]},
-  {name:'恩施', d:[[146,1,135],[141,1,56],[130,1,9]]},
-  {name:'荆州', d:[[120,334,150],[91,334,132],[129,334,139]]},
-  {name:'武汉', d:[[9,97,137],[8,98,129],[8,99,133]]},
-  {name:'黄石', d:[[29,0,136],[35,0,127],[30,0,132]]},
-  {name:'孝感', d:[[65,204,25],[43,207,3],[13,207,8]]},
-  {name:'咸宁', d:[[45,296,358],[0,106,1],[5,106,0]]},
-  {name:'随州', d:[[6,95,34],[5,95,30],[5,95,30]]},
-  {name:'黄冈', d:[[3,8,12],[8,8,5],[0,8,3]]},
-  {name:'天门', d:[[0,27,86],[0,27,86],[0,27,86]]},
+  {name:'荆州', d:[[120,334,150],[120,334,150],[119,334,148]]},
+  {name:'黄石', d:[[29,0,136],[29,0,136],[29,0,136]]},
+  {name:'武汉', d:[[9,97,137],[9,98,136],[8,99,133]]},
+  {name:'恩施', d:[[146,1,135],[136,1,70],[121,1,18]]},
+  {name:'襄阳', d:[[103,269,204],[103,269,204],[84,288,30]]},
   {name:'潜江', d:[[0,0,90],[0,0,90],[0,0,90]]},
-  {name:'荆门', d:[[4,23,2],[3,23,2],[3,23,2]]},
+  {name:'天门', d:[[0,27,86],[0,27,86],[0,27,86]]},
+  {name:'随州', d:[[6,95,34],[6,95,30],[5,95,29]]},
+  {name:'神农架', d:[[5,0,16],[5,0,16],[5,0,16]]},
+  {name:'孝感', d:[[65,204,25],[39,207,8],[13,207,8]]},
+  {name:'十堰', d:[[26,2,106],[22,2,83],[1,1,9]]},
   {name:'仙桃', d:[[10,0,41],[10,0,41],[0,0,6]]},
-  {name:'鄂州', d:[[0,3,0],[0,3,0],[0,3,0]]},
-  {name:'神农架', d:[[5,0,16],[3,0,16],[3,0,16]]},
-  {name:'其他(未归属)', d:[[0,2,5],[0,2,5],[0,2,5]]}
+  {name:'荆门', d:[[4,23,2],[3,23,2],[3,23,2]]},
+  {name:'其他', d:[[0,2,5],[0,2,5],[0,2,5]]},
+  {name:'咸宁', d:[[45,296,358],[9,106,1],[4,106,0]]},
+  {name:'黄冈', d:[[3,8,12],[3,8,10],[0,8,3]]},
+  {name:'宜昌', d:[[57,111,108],[32,115,51],[0,112,1]]},
+  {name:'鄂州', d:[[0,3,0],[0,3,0],[0,3,0]]}
 ];
-/* 专业: d=[[告警,已立项,未立项], ...三期] */
+/* 专业(一级专业): d=[[告警,已立项,未立项], ...三期] */
 const SPEC = [
-  {name:'FTTH/宽带接入', d:[[586,743,1404],[469,614,844],[389,633,520]]},
-  {name:'应急/批量工程', d:[[40,11,233],[30,11,177],[21,11,183]]},
-  {name:'政企专线',      d:[[0,274,0],[0,233,0],[0,233,0]]},
-  {name:'无线网',        d:[[0,106,1],[0,108,1],[0,109,1]]},
-  {name:'其他',          d:[[2,332,6],[0,318,6],[2,314,5]]},
-  {name:'电源及机房',    d:[[0,2,1],[0,2,1],[0,2,1]]},
-  {name:'主干光缆',      d:[[0,2,0],[0,2,0],[0,2,0]]},
-  {name:'视频监控',      d:[[0,2,0],[0,2,0],[0,2,0]]}
+  {name:'有线接入网', d:[[593,1315,1450],[505,1131,967],[375,1146,577]]},
+  {name:'无线网', d:[[32,157,182],[18,159,139],[15,160,132]]},
+  {name:'局房及基础设施', d:[[3,0,9],[3,0,9],[2,0,7]]},
+  {name:'传输网', d:[[0,0,2],[0,0,2],[0,0,2]]},
+  {name:'数据中心', d:[[0,0,1],[0,0,1],[0,0,1]]},
+  {name:'数据网', d:[[0,0,1],[0,0,1],[0,0,1]]}
 ];
 const COLORS = ['#4C72B0','#DD8452','#55A868','#C44E52','#8172B3','#937860'];
 
@@ -263,7 +261,7 @@ const D = {
       const b = BRANCHES.find(x=>x.name===this.branch);
       const z2 = b.d[2][0]+b.d[2][2];
       const z1 = b.d[1][0]+b.d[1][2];
-      banner.innerHTML = `<strong>当前查看：${b.name}</strong>　·　整改指标 ${fmt(z2)} 个（8月13日），较8月7日 ${delta(z2-z1)} 个`;
+      banner.innerHTML = `<strong>当前查看：${b.name}</strong>　·　整改指标 ${fmt(z2)} 个（8月14日），较8月7日 ${delta(z2-z1)} 个`;
       banner.classList.add('show');
       vg.style.display = 'none';
     } else {
@@ -291,22 +289,22 @@ const D = {
       const zChg = z[2]-z[1];
       const zRate = z[1]>0 ? (100*(z[1]-z[2])/z[1]).toFixed(1) : '0.0';
       cards=[
-        {label:`${b.name} · 整改指标（8月13日）`,value:fmt(z[2]),chg:`较8月7日 ${delta(zChg)}`,cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
+        {label:`${b.name} · 整改指标（8月14日）`,value:fmt(z[2]),chg:`较8月7日 ${delta(zChg)}`,cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
         {label:'一周整改压降',value:delta(zChg),chg:`压降率 ${zRate}%`,cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
         {label:'账外告警（未立项）',value:fmt(w[2]),chg:`较8月7日 ${delta(w[2]-w[1])}`,cls:w[2]<=w[1]?'good':'bad',bar:w[2]<=w[1]?'pos':'neg'},
         {label:'疑似已账外且未立项',value:fmt(n[2]),chg:`较8月7日 ${delta(n[2]-n[1])}`,cls:n[2]<=n[1]?'good':'bad',bar:n[2]<=n[1]?'pos':'neg'},
         {label:'疑似已账外且已立项',value:fmt(s[2]),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
-        {label:'累计整改（7.31→8.13）',value:fmt(z[0]-z[2]),chg:'累计压降',cls:'good',bar:'pos'},
+        {label:'累计整改（7.31→8.14）',value:fmt(z[0]-z[2]),chg:'累计压降',cls:'good',bar:'pos'},
       ];
     } else {
       const o0=OVERALL[0],o1=OVERALL[1],o2=OVERALL[2];
       cards=[
-        {label:'当前整改指标（8月13日）',value:fmt(o2.zhi),chg:`较8月7日 ${delta(o2.zhi-o1.zhi)}`,cls:o2.zhi<=o1.zhi?'good':'bad',bar:o2.zhi<=o1.zhi?'pos':'neg'},
+        {label:'当前整改指标（8月14日）',value:fmt(o2.zhi),chg:`较8月7日 ${delta(o2.zhi-o1.zhi)}`,cls:o2.zhi<=o1.zhi?'good':'bad',bar:o2.zhi<=o1.zhi?'pos':'neg'},
         {label:'一周整改压降',value:delta(o2.zhi-o1.zhi),chg:`压降率 ${(100*(o1.zhi-o2.zhi)/o1.zhi).toFixed(1)}%`,cls:'good',bar:'pos'},
         {label:'账外告警（未立项）',value:fmt(o2.warn),chg:`较8月7日 ${delta(o2.warn-o1.warn)}`,cls:o2.warn<=o1.warn?'good':'bad',bar:o2.warn<=o1.warn?'pos':'neg'},
         {label:'疑似已账外且未立项',value:fmt(o2.notset),chg:`较8月7日 ${delta(o2.notset-o1.notset)}`,cls:o2.notset<=o1.notset?'good':'bad',bar:o2.notset<=o1.notset?'pos':'neg'},
         {label:'疑似已账外且已立项',value:fmt(o2.now),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
-        {label:'整改完成（7.31→8.13）',value:fmt(o0.zhi-o2.zhi),chg:'累计压降',cls:'good',bar:'pos'},
+        {label:'整改完成（7.31→8.14）',value:fmt(o0.zhi-o2.zhi),chg:'累计压降',cls:'good',bar:'pos'},
       ];
     }
     $('kpi-row').innerHTML = cards.map(c=>`
@@ -361,7 +359,7 @@ const D = {
       else if(this.view==='bottom'){list=[...BRANCHES].map(b=>({b,d:gv(b,2)-gv(b,1)})).sort((a,x)=>x.d-a.d).slice(0,3).map(x=>x.b);}
     }
     const sorted=[...list].sort((a,b)=>gv(b,2)-gv(a,2));
-    /* Y轴标签嵌入8月13日数值，避免柱上标注重叠 */
+    /* Y轴标签嵌入8月14日数值，避免柱上标注重叠 */
     const labels=sorted.map(b=>`${b.name}  (${gv(b,2)})`);
 
     /* 选中地市高亮，其余半透明 */
@@ -382,7 +380,7 @@ const D = {
           backgroundColor:isSel.map(s=>s?c2:c2+'77'),
           borderColor:isSel.map(s=>s?c2:c2+'BB'),borderWidth:1,borderRadius:3,
           barPercentage:0.68,categoryPercentage:0.92},
-        {label:'8月13日',data:d3,
+        {label:'8月14日',data:d3,
           backgroundColor:isSel.map(s=>s?'#1A5276':c3+'77'),
           borderColor:isSel.map(s=>s?'#1A5276':c3+'BB'),
           borderWidth:isSel.map(s=>s?2:1),borderRadius:3,
@@ -399,13 +397,13 @@ const D = {
     });
 
     if(this.branch!=='all'){
-      $('branch-title').innerHTML=`各地市整改指标对比<span class="hint">高亮：${this.branch} · 括号内为8月13日值</span>`;
+      $('branch-title').innerHTML=`各地市整改指标对比<span class="hint">高亮：${this.branch} · 括号内为8月14日值</span>`;
     } else if(this.view==='top'){
-      $('branch-title').innerHTML=`整改成效前三名 — 分公司整改指标<span class="hint">按8月13日降序 · 括号内为当前值</span>`;
+      $('branch-title').innerHTML=`整改成效前三名 — 分公司整改指标<span class="hint">按8月14日降序 · 括号内为当前值</span>`;
     } else if(this.view==='bottom'){
-      $('branch-title').innerHTML=`整改较慢后三名 — 分公司整改指标<span class="hint">按8月13日降序 · 括号内为当前值</span>`;
+      $('branch-title').innerHTML=`整改较慢后三名 — 分公司整改指标<span class="hint">按8月14日降序 · 括号内为当前值</span>`;
     } else {
-      $('branch-title').innerHTML=`分公司整改指标（7月31日 / 8月7日 / 8月13日）<span class="hint">按8月13日降序 · 括号内为当前值</span>`;
+      $('branch-title').innerHTML=`分公司整改指标（7月31日 / 8月7日 / 8月14日）<span class="hint">按8月14日降序 · 括号内为当前值</span>`;
     }
   },
 
@@ -439,7 +437,7 @@ const D = {
     if(this.branch!=='all'){
       $('delta-title').innerHTML=`一周整改成效排行<span class="hint">高亮：${this.branch}</span>`;
     } else {
-      $('delta-title').innerHTML=`一周整改成效排行（8月7日 → 8月13日 变化）`;
+      $('delta-title').innerHTML=`一周整改成效排行（8月7日 → 8月14日 变化）`;
     }
   },
 
@@ -477,7 +475,7 @@ const D = {
       <th onclick="D.sortBy('name')">分公司 ${this.arrow('name')}</th>
       <th onclick="D.sortBy('c31')">7月31日</th>
       <th onclick="D.sortBy('c07')">8月7日</th>
-      <th onclick="D.sortBy('c13')">8月13日</th>
+      <th onclick="D.sortBy('c13')">8月14日</th>
       <th onclick="D.sortBy('d07')">周压降（7→13日）</th>
       <th>整改成效</th>
     </tr>`;
