@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>璐﹀宸ョ▼鏁存敼宸ヤ綔鏁版嵁鐪嬫澘</title>
+<title>账外工程整改工作数据看板</title>
 <link rel="icon" href="data:,">
 <script src="chart.umd.min.js"></script>
 <script>window.Chart||document.write('<script src="https://cdn.staticfile.org/Chart.js/4.4.1/chart.umd.min.js"><\/script>');</script>
@@ -110,30 +110,30 @@ tbody tr.highlight:hover{background:#e1f0fe}
 <div class="dashboard">
   <header class="header">
     <div>
-      <h1>璐﹀宸ョ▼鏁存敼宸ヤ綔鏁版嵁鐪嬫澘</h1>
-      <div class="sub">鏁版嵁鏈熼棿锛?026骞?鏈?1鏃?鈥?9鏈?鏃?路 鍙ｅ緞锛氳处澶栭鍛婅 + 鐤戜技宸茶处澶栦笖鏈珛椤癸紙鏁存敼鎸囨爣锛?/div>
+      <h1>账外工程整改工作数据看板</h1>
+      <div class="sub">数据期间：2026年7月31日 — 9月4日 · 口径：账外预告警 + 疑似已账外且未立项（整改指标）</div>
     </div>
     <div class="filters">
       <div class="filter-group">
-        <label>鍦板競</label>
+        <label>地市</label>
         <select id="f-branch" onchange="D.applyFilters()">
-          <option value="all">鍏ㄧ渷锛堝叏閮ㄥ湴甯傦級</option>
+          <option value="all">全省（全部地市）</option>
         </select>
       </div>
       <div class="filter-group">
-        <label>鎸囨爣鍙ｅ緞</label>
+        <label>指标口径</label>
         <select id="f-metric" onchange="D.applyFilters()">
-          <option value="zhi">鏁存敼鎸囨爣锛堝憡璀?鏈珛椤癸級</option>
-          <option value="warn">璐﹀棰勫憡璀︽湭绔嬮」</option>
-          <option value="notset">鐤戜技宸茶处澶栦笖鏈珛椤?/option>
+          <option value="zhi">整改指标（告警+未立项）</option>
+          <option value="warn">账外预告警未立项</option>
+          <option value="notset">疑似已账外且未立项</option>
         </select>
       </div>
       <div class="filter-group" id="view-group">
-        <label>瑙嗗浘</label>
+        <label>视图</label>
         <select id="f-view" onchange="D.applyFilters()">
-          <option value="all">鍏ㄩ儴鍗曚綅</option>
-          <option value="top">鏁存敼鎴愭晥鍓嶄笁鍚?/option>
-          <option value="bottom">鏁存敼杈冩參鍚庝笁鍚?/option>
+          <option value="all">全部单位</option>
+          <option value="top">整改成效前三名</option>
+          <option value="bottom">整改较慢后三名</option>
         </select>
       </div>
     </div>
@@ -145,90 +145,90 @@ tbody tr.highlight:hover{background:#e1f0fe}
 
   <section class="chart-row">
     <div class="chart-card">
-      <h3 id="trend-title">鍏ㄧ渷鏁存敼鎸囨爣鍙樺寲瓒嬪娍<span class="hint">鍛婅鏈珛椤?/ 宸茶处澶栨湭绔嬮」 鍒嗛」鏋勬垚</span></h3>
+      <h3 id="trend-title">全省整改指标变化趋势<span class="hint">告警未立项 / 已账外未立项 分项构成</span></h3>
       <div class="chart-box"><canvas id="trend-chart"></canvas></div>
     </div>
     <div class="chart-card">
-      <h3 id="spec-title">閲嶇偣涓撲笟鏁存敼鎸囨爣鏋勬垚<span class="hint">鐐瑰嚮鍥句緥鍙垏鎹笓涓氭樉绀?/span></h3>
+      <h3 id="spec-title">重点专业整改指标构成<span class="hint">点击图例可切换专业显示</span></h3>
       <div class="chart-box"><canvas id="spec-chart"></canvas></div>
     </div>
   </section>
 
   <section class="chart-row chart-row-full">
     <div class="chart-card">
-      <h3 id="branch-title">鍒嗗叕鍙告暣鏀规寚鏍囷紙7鏈?1鏃?/ 8鏈?鏃?/ 8鏈?4鏃?/ 8鏈?1鏃?/ 8鏈?8鏃?/ 9鏈?鏃ワ級<span class="hint">鎸?鏈?鏃ラ檷搴?路 鍙充晶鏍囨敞褰撳墠鍊?/span></h3>
+      <h3 id="branch-title">分公司整改指标（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日）<span class="hint">按9月4日降序 · 右侧标注当前值</span></h3>
       <div class="chart-box chart-box-tall"><canvas id="branch-chart"></canvas></div>
     </div>
   </section>
 
   <section class="chart-row chart-row-full">
     <div class="chart-card">
-      <h3 id="delta-title">涓€鍛ㄦ暣鏀规垚鏁堟帓琛岋紙8鏈?8鏃?鈫?9鏈?鏃?鍙樺寲锛?/h3>
+      <h3 id="delta-title">一周整改成效排行（8月28日 → 9月4日 变化）</h3>
       <div class="chart-box chart-box-mid"><canvas id="delta-chart"></canvas></div>
-      <div class="legend-note">缁胯壊涓哄帇闄嶆垚鏁堬紙璐熷€?涓嬮檷锛夛紝绾㈣壊涓烘寚鏍囦笂鍗囧崟浣嶃€?/div>
+      <div class="legend-note">绿色为压降成效（负值=下降），红色为指标上升单位。</div>
     </div>
   </section>
 
   <section class="table-card">
-    <h3 id="table-title">鍒嗗叕鍙告暣鏀规槑缁嗚〃锛堢偣鍑昏〃澶存帓搴忥級</h3>
+    <h3 id="table-title">分公司整改明细表（点击表头排序）</h3>
     <div style="overflow-x:auto"><table id="data-table"><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div>
   </section>
 
-  <div class="footer">鏁版嵁鏉ユ簮锛氳处澶栧伐绋嬫槑缁嗭紙7鏈?1鏃?/ 8鏈?鏃?/ 8鏈?4鏃?/ 8鏈?1鏃?/ 8鏈?8鏃?/ 9鏈?鏃ワ級 路 鐢熸垚鏃堕棿锛?026骞?鏈?鏃?/div>
+  <div class="footer">数据来源：账外工程明细（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日） · 生成时间：2026年9月4日</div>
 </div>
 
 <script>
-/* ================= 鏁版嵁 ================= */
-const DATES = ['7鏈?1鏃?,'8鏈?鏃?,'8鏈?4鏃?,'8鏈?1鏃?,'8鏈?8鏃?,'9鏈?鏃?];
+/* ================= 数据 ================= */
+const DATES = ['7月31日','8月7日','8月14日','8月21日','8月28日','9月4日'];
 const OVERALL = [
-  {date:'7鏈?1鏃?, warn:628, now:1472, notset:1645, zhi:2273},
-  {date:'8鏈?鏃?, warn:526, now:1290, notset:1119, zhi:1645},
-  {date:'8鏈?4鏃?, warn:392, now:1306, notset:720, zhi:1112},
-  {date:'8鏈?1鏃?, warn:363, now:1322, notset:279, zhi:642},
-  {date:'8鏈?8鏃?, warn:743, now:1334, notset:232, zhi:975},
-  {date:'9鏈?鏃?, warn:334, now:1362, notset:191, zhi:525}
+  {date:'7月31日', warn:628, now:1472, notset:1645, zhi:2273},
+  {date:'8月7日', warn:526, now:1290, notset:1119, zhi:1645},
+  {date:'8月14日', warn:392, now:1306, notset:720, zhi:1112},
+  {date:'8月21日', warn:363, now:1322, notset:279, zhi:642},
+  {date:'8月28日', warn:743, now:1334, notset:232, zhi:975},
+  {date:'9月4日', warn:334, now:1362, notset:191, zhi:525}
 ];
-/* 鍒嗗叕鍙? d=[[鍛婅,宸茬珛椤?鏈珛椤筣, ...浜旀湡] 鎸夋渶鏂版湡闄嶅簭 */
+/* 分公司: d=[[告警,已立项,未立项], ...五期] 按最新期降序 */
 const BRANCHES = [
-  {name:'鎭╂柦', d:[[146, 1, 135], [136, 1, 70], [121, 1, 18], [114, 1, 25], [135, 1, 45], [59, 1, 78]]},
-  {name:'鑽嗗窞', d:[[120, 334, 150], [120, 334, 150], [119, 334, 148], [113, 349, 72], [290, 352, 42], [127, 362, 0]]},
-  {name:'姝︽眽', d:[[9, 97, 137], [9, 98, 136], [8, 99, 133], [8, 99, 105], [8, 102, 85], [8, 102, 85]]},
-  {name:'瀛濇劅', d:[[65, 204, 25], [39, 207, 8], [13, 207, 8], [14, 207, 6], [59, 212, 4], [58, 212, 2]]},
-  {name:'绁炲啘鏋?, d:[[5, 0, 16], [5, 0, 16], [5, 0, 16], [15, 0, 16], [36, 0, 11], [31, 0, 0]]},
-  {name:'闅忓窞', d:[[6, 95, 34], [6, 95, 30], [5, 95, 29], [6, 95, 29], [21, 95, 31], [9, 106, 18]]},
-  {name:'瑗勯槼', d:[[103, 269, 204], [103, 269, 204], [84, 288, 30], [51, 289, 14], [81, 289, 3], [21, 290, 0]]},
-  {name:'榛勭煶', d:[[29, 0, 136], [29, 0, 136], [29, 0, 136], [10, 0, 0], [7, 0, 0], [11, 0, 0]]},
-  {name:'鑽嗛棬', d:[[4, 23, 2], [3, 23, 2], [3, 23, 2], [5, 23, 2], [7, 23, 2], [4, 23, 2]]},
-  {name:'鐪佸叕鍙?, d:[[0, 2, 5], [0, 2, 5], [0, 2, 5], [0, 2, 5], [0, 2, 5], [0, 2, 5]]},
-  {name:'榛勫唸', d:[[3, 8, 12], [3, 8, 10], [0, 8, 3], [27, 8, 3], [52, 8, 3], [3, 8, 0]]},
-  {name:'鍜稿畞', d:[[45, 296, 358], [9, 106, 1], [4, 106, 0], [0, 106, 0], [34, 106, 0], [3, 112, 0]]},
-  {name:'瀹滄槍', d:[[57, 111, 108], [32, 115, 51], [0, 112, 1], [0, 112, 1], [0, 112, 1], [0, 112, 1]]},
-  {name:'澶╅棬', d:[[0, 27, 86], [0, 27, 86], [0, 27, 86], [0, 27, 1], [0, 28, 0], [0, 28, 0]]},
-  {name:'娼滄睙', d:[[0, 0, 90], [0, 0, 90], [0, 0, 90], [0, 0, 0], [4, 0, 0], [0, 0, 0]]},
-  {name:'鍗佸牥', d:[[26, 2, 106], [22, 2, 83], [1, 1, 9], [0, 1, 0], [9, 1, 0], [0, 1, 0]]},
-  {name:'閯傚窞', d:[[0, 3, 0], [0, 3, 0], [0, 3, 0], [0, 3, 0], [0, 3, 0], [0, 3, 0]]},
-  {name:'浠欐', d:[[10, 0, 41], [10, 0, 41], [0, 0, 6], [0, 0, 0], [0, 0, 0], [0, 0, 0]]}
+  {name:'恩施', d:[[146, 1, 135], [136, 1, 70], [121, 1, 18], [114, 1, 25], [135, 1, 45], [59, 1, 78]]},
+  {name:'荆州', d:[[120, 334, 150], [120, 334, 150], [119, 334, 148], [113, 349, 72], [290, 352, 42], [127, 362, 0]]},
+  {name:'武汉', d:[[9, 97, 137], [9, 98, 136], [8, 99, 133], [8, 99, 105], [8, 102, 85], [8, 102, 85]]},
+  {name:'孝感', d:[[65, 204, 25], [39, 207, 8], [13, 207, 8], [14, 207, 6], [59, 212, 4], [58, 212, 2]]},
+  {name:'神农架', d:[[5, 0, 16], [5, 0, 16], [5, 0, 16], [15, 0, 16], [36, 0, 11], [31, 0, 0]]},
+  {name:'随州', d:[[6, 95, 34], [6, 95, 30], [5, 95, 29], [6, 95, 29], [21, 95, 31], [9, 106, 18]]},
+  {name:'襄阳', d:[[103, 269, 204], [103, 269, 204], [84, 288, 30], [51, 289, 14], [81, 289, 3], [21, 290, 0]]},
+  {name:'黄石', d:[[29, 0, 136], [29, 0, 136], [29, 0, 136], [10, 0, 0], [7, 0, 0], [11, 0, 0]]},
+  {name:'荆门', d:[[4, 23, 2], [3, 23, 2], [3, 23, 2], [5, 23, 2], [7, 23, 2], [4, 23, 2]]},
+  {name:'省公司', d:[[0, 2, 5], [0, 2, 5], [0, 2, 5], [0, 2, 5], [0, 2, 5], [0, 2, 5]]},
+  {name:'黄冈', d:[[3, 8, 12], [3, 8, 10], [0, 8, 3], [27, 8, 3], [52, 8, 3], [3, 8, 0]]},
+  {name:'咸宁', d:[[45, 296, 358], [9, 106, 1], [4, 106, 0], [0, 106, 0], [34, 106, 0], [3, 112, 0]]},
+  {name:'宜昌', d:[[57, 111, 108], [32, 115, 51], [0, 112, 1], [0, 112, 1], [0, 112, 1], [0, 112, 1]]},
+  {name:'天门', d:[[0, 27, 86], [0, 27, 86], [0, 27, 86], [0, 27, 1], [0, 28, 0], [0, 28, 0]]},
+  {name:'潜江', d:[[0, 0, 90], [0, 0, 90], [0, 0, 90], [0, 0, 0], [4, 0, 0], [0, 0, 0]]},
+  {name:'十堰', d:[[26, 2, 106], [22, 2, 83], [1, 1, 9], [0, 1, 0], [9, 1, 0], [0, 1, 0]]},
+  {name:'鄂州', d:[[0, 3, 0], [0, 3, 0], [0, 3, 0], [0, 3, 0], [0, 3, 0], [0, 3, 0]]},
+  {name:'仙桃', d:[[10, 0, 41], [10, 0, 41], [0, 0, 6], [0, 0, 0], [0, 0, 0], [0, 0, 0]]}
 ];
-/* 涓撲笟(涓€绾т笓涓?: d=[[鍛婅,宸茬珛椤?鏈珛椤筣, ...浜旀湡] */
+/* 专业(一级专业): d=[[告警,已立项,未立项], ...五期] */
 const SPEC = [
-  {name:'浼犺緭缃?, d:[[0, 0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 2]]},
-  {name:'灞€鎴垮強鍩虹璁炬柦', d:[[3, 0, 9], [3, 0, 9], [2, 0, 7], [2, 0, 7], [2, 0, 7], [2, 0, 7]]},
-  {name:'鏁版嵁涓績', d:[[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]]},
-  {name:'鏁版嵁缃?, d:[[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]]},
-  {name:'鏃犵嚎缃?, d:[[32, 157, 182], [18, 159, 139], [15, 160, 132], [6, 160, 115], [13, 163, 91], [4, 175, 74]]},
-  {name:'鏈夌嚎鎺ュ叆缃?, d:[[593, 1315, 1450], [505, 1131, 967], [375, 1146, 577], [355, 1162, 153], [728, 1171, 130], [328, 1187, 106]]}
+  {name:'传输网', d:[[0, 0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 2], [0, 0, 2]]},
+  {name:'局房及基础设施', d:[[3, 0, 9], [3, 0, 9], [2, 0, 7], [2, 0, 7], [2, 0, 7], [2, 0, 7]]},
+  {name:'数据中心', d:[[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]]},
+  {name:'数据网', d:[[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 0, 1]]},
+  {name:'无线网', d:[[32, 157, 182], [18, 159, 139], [15, 160, 132], [6, 160, 115], [13, 163, 91], [4, 175, 74]]},
+  {name:'有线接入网', d:[[593, 1315, 1450], [505, 1131, 967], [375, 1146, 577], [355, 1162, 153], [728, 1171, 130], [328, 1187, 106]]}
 ];
 const COLORS = ['#4C72B0','#DD8452','#55A868','#C44E52','#8172B3','#937860'];
 
-/* ================= 宸ュ叿 ================= */
+/* ================= 工具 ================= */
 const $ = id => document.getElementById(id);
 const fmt = v => v.toLocaleString('zh-CN');
 const delta = v => (v>0?'+':'')+v.toLocaleString('zh-CN');
 const tooltipStyle = {backgroundColor:'rgba(26,54,93,.92)',padding:12,cornerRadius:8,titleFont:{size:13},bodyFont:{size:12}};
 
-/* 鎴愭晥鎺掕鍥炬暟鍊兼爣绛炬彃浠?
-   chartjs-plugin-datalabels 2.2.0 鍦ㄦí鍚戞潯褰㈠浘(indexAxis:'y')瀛樺湪鍏煎闂锛?
-   鏍囩鐨?origin.y 浼氳缃负 null 瀵艰嚧鏍囩鏃犳硶娓叉煋銆傛澶勭敤鍘熺敓 canvas 缁樺埗鏍囩锛?00% 鍙潬銆?*/
+/* 成效排行图数值标签插件
+   chartjs-plugin-datalabels 2.2.0 在横向条形图(indexAxis:'y')存在兼容问题，
+   标签的 origin.y 会被置为 null 导致标签无法渲染。此处用原生 canvas 绘制标签，100% 可靠。 */
 const deltaLabelPlugin = {
   id:'deltaLabel',
   afterDatasetsDraw(chart){
@@ -243,7 +243,7 @@ const deltaLabelPlugin = {
       if(bar.skip)return;
       const v=vals[i];
       if(v===0){
-        /* 0 鍊硷細鐏拌壊鐭爣璁?+ "0" 鏍囩 */
+        /* 0 值：灰色短标记 + "0" 标签 */
         ctx.fillStyle='#a0aec0';
         ctx.fillRect(bar.base-4, bar.y+bar.height/2-1, 4, 2);
         ctx.fillStyle='#888';
@@ -251,7 +251,7 @@ const deltaLabelPlugin = {
         ctx.fillText('0', bar.base-9, bar.y+bar.height/2);
         return;
       }
-      /* 闈?0 鍊硷細娣辫壊鏁板€兼爣绛撅紝璐存潯褰㈠乏绔渚?*/
+      /* 非 0 值：深色数值标签，贴条形左端外侧 */
       ctx.fillStyle='#333';
       ctx.textAlign='right';
       ctx.fillText(v.toLocaleString('zh-CN'), bar.x-6, bar.y+bar.height/2);
@@ -260,7 +260,7 @@ const deltaLabelPlugin = {
   }
 };
 
-/* ================= 涓诲璞?================= */
+/* ================= 主对象 ================= */
 const D = {
   metric:'zhi',
   view:'all',
@@ -270,7 +270,7 @@ const D = {
   charts:{},
 
   init(){
-    /* 濉厖鍦板競涓嬫媺 */
+    /* 填充地市下拉 */
     const sel = $('f-branch');
     BRANCHES.forEach(b=>{
       const o=document.createElement('option');
@@ -291,14 +291,14 @@ const D = {
     this.view   = $('f-view').value;
     this.branch = $('f-branch').value;
 
-    /* 鍦板競妯箙 & 瑙嗗浘绛涢€夋樉闅?*/
+    /* 地市横幅 & 视图筛选显隐 */
     const banner = $('branch-banner');
     const vg = $('view-group');
     if(this.branch !== 'all'){
       const b = BRANCHES.find(x=>x.name===this.branch);
       const z5 = b.d[5][0]+b.d[5][2];
       const z4 = b.d[4][0]+b.d[4][2];
-      banner.innerHTML = `<strong>褰撳墠鏌ョ湅锛?{b.name}</strong>銆€路銆€鏁存敼鎸囨爣 ${fmt(z5)} 涓紙9鏈?鏃ワ級锛岃緝8鏈?8鏃?${delta(z5-z4)} 涓猔;
+      banner.innerHTML = `<strong>当前查看：${b.name}</strong>　·　整改指标 ${fmt(z5)} 个（9月4日），较8月28日 ${delta(z5-z4)} 个`;
       banner.classList.add('show');
       vg.style.display = 'none';
     } else {
@@ -326,22 +326,22 @@ const D = {
       const zChg = z[5]-z[4];
       const zRate = z[4]>0 ? (100*(z[4]-z[5])/z[4]).toFixed(1) : '0.0';
       cards=[
-        {label:`${b.name} 路 鏁存敼鎸囨爣锛?鏈?鏃ワ級`,value:fmt(z[5]),chg:`杈?鏈?8鏃?${delta(zChg)}`,cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
-        {label:'涓€鍛ㄦ暣鏀瑰彉鍖?,value:delta(zChg),chg:zChg>0?'鎸囨爣涓婂崌':'鎸囨爣鍘嬮檷',cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
-        {label:'璐﹀鍛婅锛堟湭绔嬮」锛?,value:fmt(w[5]),chg:`杈?鏈?8鏃?${delta(w[5]-w[4])}`,cls:w[5]<=w[4]?'good':'bad',bar:w[5]<=w[4]?'pos':'neg'},
-        {label:'鐤戜技宸茶处澶栦笖鏈珛椤?,value:fmt(n[5]),chg:`杈?鏈?8鏃?${delta(n[5]-n[4])}`,cls:n[5]<=n[4]?'good':'bad',bar:n[5]<=n[4]?'pos':'neg'},
-        {label:'鐤戜技宸茶处澶栦笖宸茬珛椤?,value:fmt(s[5]),chg:'鏃㈠畾浜嬪疄锛屼笉绾冲叆鏁存敼',cls:'flat',bar:'neutral'},
-        {label:'绱鏁存敼锛?.31鈫?.4锛?,value:fmt(z[0]-z[5]),chg:'绱鍘嬮檷',cls:'good',bar:'pos'},
+        {label:`${b.name} · 整改指标（9月4日）`,value:fmt(z[5]),chg:`较8月28日 ${delta(zChg)}`,cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
+        {label:'一周整改变化',value:delta(zChg),chg:zChg>0?'指标上升':'指标压降',cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
+        {label:'账外告警（未立项）',value:fmt(w[5]),chg:`较8月28日 ${delta(w[5]-w[4])}`,cls:w[5]<=w[4]?'good':'bad',bar:w[5]<=w[4]?'pos':'neg'},
+        {label:'疑似已账外且未立项',value:fmt(n[5]),chg:`较8月28日 ${delta(n[5]-n[4])}`,cls:n[5]<=n[4]?'good':'bad',bar:n[5]<=n[4]?'pos':'neg'},
+        {label:'疑似已账外且已立项',value:fmt(s[5]),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
+        {label:'累计整改（7.31→9.4）',value:fmt(z[0]-z[5]),chg:'累计压降',cls:'good',bar:'pos'},
       ];
     } else {
       const o0=OVERALL[0],o4=OVERALL[4],o5=OVERALL[5];
       cards=[
-        {label:'褰撳墠鏁存敼鎸囨爣锛?鏈?鏃ワ級',value:fmt(o5.zhi),chg:`杈?鏈?8鏃?${delta(o5.zhi-o4.zhi)}`,cls:o5.zhi<=o4.zhi?'good':'bad',bar:o5.zhi<=o4.zhi?'pos':'neg'},
-        {label:'涓€鍛ㄦ暣鏀瑰彉鍖?,value:delta(o5.zhi-o4.zhi),chg:o5.zhi>o4.zhi?'鎸囨爣涓婂崌':'鎸囨爣鍘嬮檷',cls:o5.zhi<=o4.zhi?'good':'bad',bar:o5.zhi<=o4.zhi?'pos':'neg'},
-        {label:'璐﹀鍛婅锛堟湭绔嬮」锛?,value:fmt(o5.warn),chg:`杈?鏈?8鏃?${delta(o5.warn-o4.warn)}`,cls:o5.warn<=o4.warn?'good':'bad',bar:o5.warn<=o4.warn?'pos':'neg'},
-        {label:'鐤戜技宸茶处澶栦笖鏈珛椤?,value:fmt(o5.notset),chg:`杈?鏈?8鏃?${delta(o5.notset-o4.notset)}`,cls:o5.notset<=o4.notset?'good':'bad',bar:o5.notset<=o4.notset?'pos':'neg'},
-        {label:'鐤戜技宸茶处澶栦笖宸茬珛椤?,value:fmt(o5.now),chg:'鏃㈠畾浜嬪疄锛屼笉绾冲叆鏁存敼',cls:'flat',bar:'neutral'},
-        {label:'鏁存敼瀹屾垚锛?.31鈫?.4锛?,value:fmt(o0.zhi-o5.zhi),chg:'绱鍘嬮檷',cls:'good',bar:'pos'},
+        {label:'当前整改指标（9月4日）',value:fmt(o5.zhi),chg:`较8月28日 ${delta(o5.zhi-o4.zhi)}`,cls:o5.zhi<=o4.zhi?'good':'bad',bar:o5.zhi<=o4.zhi?'pos':'neg'},
+        {label:'一周整改变化',value:delta(o5.zhi-o4.zhi),chg:o5.zhi>o4.zhi?'指标上升':'指标压降',cls:o5.zhi<=o4.zhi?'good':'bad',bar:o5.zhi<=o4.zhi?'pos':'neg'},
+        {label:'账外告警（未立项）',value:fmt(o5.warn),chg:`较8月28日 ${delta(o5.warn-o4.warn)}`,cls:o5.warn<=o4.warn?'good':'bad',bar:o5.warn<=o4.warn?'pos':'neg'},
+        {label:'疑似已账外且未立项',value:fmt(o5.notset),chg:`较8月28日 ${delta(o5.notset-o4.notset)}`,cls:o5.notset<=o4.notset?'good':'bad',bar:o5.notset<=o4.notset?'pos':'neg'},
+        {label:'疑似已账外且已立项',value:fmt(o5.now),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
+        {label:'整改完成（7.31→9.4）',value:fmt(o0.zhi-o5.zhi),chg:'累计压降',cls:'good',bar:'pos'},
       ];
     }
     $('kpi-row').innerHTML = cards.map(c=>`
@@ -352,7 +352,7 @@ const D = {
       </div>`).join('');
   },
 
-  /* ===== 瓒嬪娍鍥?===== */
+  /* ===== 趋势图 ===== */
   renderTrend(){
     if(this.charts.trend){this.charts.trend.destroy();}
     let warn,notset,set,title;
@@ -361,30 +361,30 @@ const D = {
       warn=b.d.map(r=>r[0]);
       set=b.d.map(r=>r[1]);
       notset=b.d.map(r=>r[2]);
-      title=`${b.name}鏁存敼鎸囨爣鍙樺寲瓒嬪娍`;
+      title=`${b.name}整改指标变化趋势`;
     } else {
       warn=OVERALL.map(o=>o.warn);
       notset=OVERALL.map(o=>o.notset);
       set=OVERALL.map(o=>o.now);
-      title='鍏ㄧ渷鏁存敼鎸囨爣鍙樺寲瓒嬪娍';
+      title='全省整改指标变化趋势';
     }
-    $('trend-title').innerHTML = `${title}<span class="hint">鍛婅鏈珛椤?/ 宸茶处澶栨湭绔嬮」 鍒嗛」鏋勬垚</span>`;
+    $('trend-title').innerHTML = `${title}<span class="hint">告警未立项 / 已账外未立项 分项构成</span>`;
     this.charts.trend = new Chart($('trend-chart'),{
       type:'bar',
       data:{labels:DATES,datasets:[
-        {label:'璐﹀鍛婅锛堟湭绔嬮」锛?,data:warn,backgroundColor:'#DD8452CC',borderColor:'#DD8452',borderWidth:1,stack:'a',borderRadius:4},
-        {label:'鐤戜技宸茶处澶栦笖鏈珛椤?,data:notset,backgroundColor:'#C44E52B3',borderColor:'#C44E52',borderWidth:1,stack:'a',borderRadius:4},
-        {label:'鐤戜技宸茶处澶栦笖宸茬珛椤?鏃㈠畾)',data:set,backgroundColor:'#a0aec033',borderColor:'#a0aec088',borderWidth:1,stack:'b',borderRadius:4}
+        {label:'账外告警（未立项）',data:warn,backgroundColor:'#DD8452CC',borderColor:'#DD8452',borderWidth:1,stack:'a',borderRadius:4},
+        {label:'疑似已账外且未立项',data:notset,backgroundColor:'#C44E52B3',borderColor:'#C44E52',borderWidth:1,stack:'a',borderRadius:4},
+        {label:'疑似已账外且已立项(既定)',data:set,backgroundColor:'#a0aec033',borderColor:'#a0aec088',borderWidth:1,stack:'b',borderRadius:4}
       ]},
       options:{responsive:true,maintainAspectRatio:false,
         plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14,font:{size:12}}},
-          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y.toLocaleString()} 涓猔}}},
+          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y.toLocaleString()} 个`}}},
         scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{callback:v=>v.toLocaleString()}}}
       }
     });
   },
 
-  /* ===== 鍒嗗叕鍙稿姣斿浘 ===== */
+  /* ===== 分公司对比图 ===== */
   renderBranch(){
     const m=this.metric;
     const idx=m==='warn'?0:m==='notset'?2:-1;
@@ -396,10 +396,10 @@ const D = {
       else if(this.view==='bottom'){list=[...BRANCHES].map(b=>({b,d:gv(b,5)-gv(b,4)})).sort((a,x)=>x.d-a.d).slice(0,3).map(x=>x.b);}
     }
     const sorted=[...list].sort((a,b)=>gv(b,5)-gv(a,5));
-    /* Y杞存爣绛惧祵鍏ユ渶鏂版湡鏁板€硷紝閬垮厤鏌变笂鏍囨敞閲嶅彔 */
+    /* Y轴标签嵌入最新期数值，避免柱上标注重叠 */
     const labels=sorted.map(b=>`${b.name}  (${gv(b,5)})`);
 
-    /* 閫変腑鍦板競楂樹寒锛屽叾浣欏崐閫忔槑 */
+    /* 选中地市高亮，其余半透明 */
     const isSel=sorted.map(b=>this.branch!=='all'&&b.name===this.branch);
     const c1='#C0392B', c2='#E67E22', c3='#2471A3', c4='#1A5276', c5='#0E3A5C', c6='#08203A';
     const d1=sorted.map(b=>gv(b,0));
@@ -412,28 +412,28 @@ const D = {
     if(this.charts.branch){this.charts.branch.destroy();}
     this.charts.branch=new Chart($('branch-chart'),{type:'bar',
       data:{labels,datasets:[
-        {label:'7鏈?1鏃?,data:d1,
+        {label:'7月31日',data:d1,
           backgroundColor:isSel.map(s=>s?c1:c1+'77'),
           borderColor:isSel.map(s=>s?c1:c1+'BB'),borderWidth:1,borderRadius:3,
           barPercentage:0.68,categoryPercentage:0.92},
-        {label:'8鏈?鏃?,data:d2,
+        {label:'8月7日',data:d2,
           backgroundColor:isSel.map(s=>s?c2:c2+'77'),
           borderColor:isSel.map(s=>s?c2:c2+'BB'),borderWidth:1,borderRadius:3,
           barPercentage:0.68,categoryPercentage:0.92},
-        {label:'8鏈?4鏃?,data:d3,
+        {label:'8月14日',data:d3,
           backgroundColor:isSel.map(s=>s?c3:c3+'77'),
           borderColor:isSel.map(s=>s?c3:c3+'BB'),borderWidth:1,borderRadius:3,
           barPercentage:0.68,categoryPercentage:0.92},
-        {label:'8鏈?1鏃?,data:d4,
+        {label:'8月21日',data:d4,
           backgroundColor:isSel.map(s=>s?c4:c4+'77'),
           borderColor:isSel.map(s=>s?c4:c4+'BB'),
           borderWidth:isSel.map(s=>s?2:1),borderRadius:3,
           barPercentage:0.68,categoryPercentage:0.92},
-        {label:'8鏈?8鏃?,data:d5,
+        {label:'8月28日',data:d5,
           backgroundColor:isSel.map(s=>s?c5:c5+'77'),
           borderColor:isSel.map(s=>s?c5:c5+'BB'),borderWidth:1,borderRadius:3,
           barPercentage:0.68,categoryPercentage:0.92},
-        {label:'9鏈?鏃?,data:d6,
+        {label:'9月4日',data:d6,
           backgroundColor:isSel.map(s=>s?c6:c6+'77'),
           borderColor:isSel.map(s=>s?c6:c6+'BB'),
           borderWidth:isSel.map(s=>s?2:1),borderRadius:3,
@@ -441,7 +441,7 @@ const D = {
       ]},
       options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
         plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:13}}},
-          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.dataset.label}锛?{c.parsed.x.toLocaleString()} 涓猔}},
+          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.dataset.label}：${c.parsed.x.toLocaleString()} 个`}},
           datalabels:{display:false}},
         scales:{x:{beginAtZero:true,grid:{display:false},ticks:{callback:v=>v.toLocaleString()}},
           y:{grid:{display:false},ticks:{font:{size:12}}}
@@ -450,17 +450,17 @@ const D = {
     });
 
     if(this.branch!=='all'){
-      $('branch-title').innerHTML=`鍚勫湴甯傛暣鏀规寚鏍囧姣?span class="hint">楂樹寒锛?{this.branch} 路 鎷彿鍐呬负9鏈?鏃ュ€?/span>`;
+      $('branch-title').innerHTML=`各地市整改指标对比<span class="hint">高亮：${this.branch} · 括号内为9月4日值</span>`;
     } else if(this.view==='top'){
-      $('branch-title').innerHTML=`鏁存敼鎴愭晥鍓嶄笁鍚?鈥?鍒嗗叕鍙告暣鏀规寚鏍?span class="hint">鎸?鏈?鏃ラ檷搴?路 鎷彿鍐呬负褰撳墠鍊?/span>`;
+      $('branch-title').innerHTML=`整改成效前三名 — 分公司整改指标<span class="hint">按9月4日降序 · 括号内为当前值</span>`;
     } else if(this.view==='bottom'){
-      $('branch-title').innerHTML=`鏁存敼杈冩參鍚庝笁鍚?鈥?鍒嗗叕鍙告暣鏀规寚鏍?span class="hint">鎸?鏈?鏃ラ檷搴?路 鎷彿鍐呬负褰撳墠鍊?/span>`;
+      $('branch-title').innerHTML=`整改较慢后三名 — 分公司整改指标<span class="hint">按9月4日降序 · 括号内为当前值</span>`;
     } else {
-      $('branch-title').innerHTML=`鍒嗗叕鍙告暣鏀规寚鏍囷紙7鏈?1鏃?/ 8鏈?鏃?/ 8鏈?4鏃?/ 8鏈?1鏃?/ 8鏈?8鏃?/ 9鏈?鏃ワ級<span class="hint">鎸?鏈?鏃ラ檷搴?路 鎷彿鍐呬负褰撳墠鍊?/span>`;
+      $('branch-title').innerHTML=`分公司整改指标（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日）<span class="hint">按9月4日降序 · 括号内为当前值</span>`;
     }
   },
 
-  /* ===== 鎴愭晥鎺掕鍥?===== */
+  /* ===== 成效排行图 ===== */
   renderDelta(){
     const m=this.metric;
     const idx=m==='warn'?0:m==='notset'?2:-1;
@@ -481,19 +481,19 @@ const D = {
       data:{labels,datasets:[{data:vals,backgroundColor:bgColor,borderRadius:3,borderWidth:isSel.map(s=>s?2:0),borderColor:bgColor,barPercentage:0.8,categoryPercentage:0.85}]},
       options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
         plugins:{legend:{display:false},
-          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.parsed.x>0?'+':''}${c.parsed.x.toLocaleString()} 涓猔}}},
+          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.parsed.x>0?'+':''}${c.parsed.x.toLocaleString()} 个`}}},
         scales:{x:{beginAtZero:true,grid:{display:false},ticks:{callback:v=>v.toLocaleString()}},y:{grid:{display:false},ticks:{font:{size:12}}}}
       }
     });
 
     if(this.branch!=='all'){
-      $('delta-title').innerHTML=`涓€鍛ㄦ暣鏀规垚鏁堟帓琛?span class="hint">楂樹寒锛?{this.branch}</span>`;
+      $('delta-title').innerHTML=`一周整改成效排行<span class="hint">高亮：${this.branch}</span>`;
     } else {
-      $('delta-title').innerHTML=`涓€鍛ㄦ暣鏀规垚鏁堟帓琛岋紙8鏈?8鏃?鈫?9鏈?鏃?鍙樺寲锛塦;
+      $('delta-title').innerHTML=`一周整改成效排行（8月28日 → 9月4日 变化）`;
     }
   },
 
-  /* ===== 涓撲笟鏋勬垚鍥?===== */
+  /* ===== 专业构成图 ===== */
   renderSpec(){
     const idx=this.metric==='warn'?0:this.metric==='notset'?2:-1;
     const perMetric=SPEC.map(sp=>{
@@ -508,31 +508,31 @@ const D = {
       data:{labels:DATES,datasets},
       options:{responsive:true,maintainAspectRatio:false,
         plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:10,boxWidth:10,font:{size:11}}},
-          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.dataset.label}锛?{c.parsed.y.toLocaleString()} 涓猔}},
+          tooltip:{...tooltipStyle,callbacks:{label:c=>` ${c.dataset.label}：${c.parsed.y.toLocaleString()} 个`}},
           datalabels:{display:false}},
         scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,ticks:{callback:v=>v.toLocaleString()}}}
       }
     });
 
     if(this.branch!=='all'){
-      $('spec-title').innerHTML=`鍏ㄧ渷閲嶇偣涓撲笟鏁存敼鎸囨爣鏋勬垚<span class="hint">鍙傝€冿紙鏃犲崟鍦板競涓撲笟鏁版嵁锛?/span>`;
+      $('spec-title').innerHTML=`全省重点专业整改指标构成<span class="hint">参考（无单地市专业数据）</span>`;
     } else {
-      $('spec-title').innerHTML=`閲嶇偣涓撲笟鏁存敼鎸囨爣鏋勬垚<span class="hint">鐐瑰嚮鍥句緥鍙垏鎹笓涓氭樉绀?/span>`;
+      $('spec-title').innerHTML=`重点专业整改指标构成<span class="hint">点击图例可切换专业显示</span>`;
     }
   },
 
-  /* ===== 琛ㄦ牸 ===== */
+  /* ===== 表格 ===== */
   renderTableHead(){
     $('table-head').innerHTML=`<tr>
-      <th onclick="D.sortBy('name')">鍒嗗叕鍙?${this.arrow('name')}</th>
-      <th onclick="D.sortBy('c31')">7鏈?1鏃?/th>
-      <th onclick="D.sortBy('c07')">8鏈?鏃?/th>
-      <th onclick="D.sortBy('c13')">8鏈?4鏃?/th>
-      <th onclick="D.sortBy('c21')">8鏈?1鏃?/th>
-      <th onclick="D.sortBy('c28')">8鏈?8鏃?/th>
-      <th onclick="D.sortBy('c04')">9鏈?鏃?/th>
-      <th onclick="D.sortBy('d28')">鍛ㄥ彉鍖栵紙28鈫?鏃ワ級</th>
-      <th>鏁存敼鎴愭晥</th>
+      <th onclick="D.sortBy('name')">分公司 ${this.arrow('name')}</th>
+      <th onclick="D.sortBy('c31')">7月31日</th>
+      <th onclick="D.sortBy('c07')">8月7日</th>
+      <th onclick="D.sortBy('c13')">8月14日</th>
+      <th onclick="D.sortBy('c21')">8月21日</th>
+      <th onclick="D.sortBy('c28')">8月28日</th>
+      <th onclick="D.sortBy('c04')">9月4日</th>
+      <th onclick="D.sortBy('d28')">周变化（28→4日）</th>
+      <th>整改成效</th>
     </tr>`;
   },
   arrow(col){return this.sortCol===col?(this.sortDir==='desc'?' \u2193':' \u2191'):'';},
@@ -565,10 +565,10 @@ const D = {
     $('table-body').innerHTML=rows.map(r=>{
       const cls=r.d28<=0?'good':'bad';
       const hl=this.branch===r.name?'highlight':'';
-      const badge=r.d28<=-50?'<span class="badge badge-good">鍘嬮檷鏄庢樉</span>'
-        :r.d28>0?'<span class="badge badge-bad">鎸囨爣涓婂崌</span>'
-        :r.d28===0?'<span class="badge badge-flat">鎸佸钩</span>'
-        :'<span class="badge badge-good">鎸佺画鍘嬮檷</span>';
+      const badge=r.d28<=-50?'<span class="badge badge-good">压降明显</span>'
+        :r.d28>0?'<span class="badge badge-bad">指标上升</span>'
+        :r.d28===0?'<span class="badge badge-flat">持平</span>'
+        :'<span class="badge badge-good">持续压降</span>';
       return `<tr class="${hl}">
         <td>${r.name}</td>
         <td>${fmt(r.c31)}</td><td>${fmt(r.c07)}</td><td>${fmt(r.c13)}</td><td>${fmt(r.c21)}</td><td>${fmt(r.c28)}</td><td style="font-weight:600">${fmt(r.c04)}</td>
@@ -576,9 +576,9 @@ const D = {
     }).join('');
 
     if(this.branch!=='all'){
-      $('table-title').innerHTML=`鍒嗗叕鍙告暣鏀规槑缁嗚〃<span class="hint">楂樹寒锛?{this.branch}</span>`;
+      $('table-title').innerHTML=`分公司整改明细表<span class="hint">高亮：${this.branch}</span>`;
     } else {
-      $('table-title').textContent='鍒嗗叕鍙告暣鏀规槑缁嗚〃锛堢偣鍑昏〃澶存帓搴忥級';
+      $('table-title').textContent='分公司整改明细表（点击表头排序）';
     }
   }
 };
@@ -586,4 +586,3 @@ const D = {
 <script>D.init();</script>
 </body>
 </html>
-
