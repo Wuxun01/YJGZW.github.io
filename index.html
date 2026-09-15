@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>账外工程整改工作数据看板</title>
 <link rel="icon" href="data:,">
-<script src="chart.umd.min.js"></script>
+<script src="lib/chart.umd.min.js"></script>
 <script>window.Chart||document.write('<script src="https://cdn.staticfile.org/Chart.js/4.4.1/chart.umd.min.js"><\/script>');</script>
-<script src="chartjs-plugin-datalabels.min.js"></script>
+<script src="lib/chartjs-plugin-datalabels.min.js"></script>
 <script>window.ChartDataLabels||document.write('<script src="https://cdn.staticfile.org/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"><\/script>');</script>
 <script>if(window.ChartDataLabels){Chart.register(ChartDataLabels);}</script>
 <style>
@@ -111,7 +111,7 @@ tbody tr.highlight:hover{background:#e1f0fe}
   <header class="header">
     <div>
       <h1>账外工程整改工作数据看板</h1>
-      <div class="sub">数据期间：2026年7月31日 — 9月14日 · 口径：账外预告警 + 疑似已账外且未立项（整改指标）</div>
+      <div class="sub">数据期间：2026年7月31日 — 9月15日 · 口径：账外预告警 + 疑似已账外且未立项（整改指标）</div>
     </div>
     <div class="filters">
       <div class="filter-group">
@@ -156,14 +156,14 @@ tbody tr.highlight:hover{background:#e1f0fe}
 
   <section class="chart-row chart-row-full">
     <div class="chart-card">
-      <h3 id="branch-title">分公司整改指标（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日 / 9月10日 / 9月11日 / 9月14日）<span class="hint">按9月14日降序 · 右侧标注当前值</span></h3>
+      <h3 id="branch-title">分公司整改指标（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日 / 9月10日 / 9月11日 / 9月14日 / 9月15日）<span class="hint">按9月15日降序 · 右侧标注当前值</span></h3>
       <div class="chart-box chart-box-tall"><canvas id="branch-chart"></canvas></div>
     </div>
   </section>
 
   <section class="chart-row chart-row-full">
     <div class="chart-card">
-      <h3 id="delta-title">一周整改成效排行（9月11日 → 9月14日 变化）</h3>
+      <h3 id="delta-title">一周整改成效排行（9月14日 → 9月15日 变化）</h3>
       <div class="chart-box chart-box-mid"><canvas id="delta-chart"></canvas></div>
       <div class="legend-note">绿色为压降成效（负值=下降），红色为指标上升单位。</div>
     </div>
@@ -174,12 +174,12 @@ tbody tr.highlight:hover{background:#e1f0fe}
     <div style="overflow-x:auto"><table id="data-table"><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div>
   </section>
 
-  <div class="footer">数据来源：账外工程明细（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日 / 9月10日 / 9月11日 / 9月14日） · 生成时间：2026年9月14日</div>
+  <div class="footer">数据来源：账外工程明细（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日 / 9月10日 / 9月11日 / 9月14日 / 9月15日） · 生成时间：2026年9月15日</div>
 </div>
 
 <script>
 /* ================= 数据 ================= */
-const DATES = ['7月31日','8月7日','8月14日','8月21日','8月28日','9月4日','9月10日','9月11日','9月14日'];
+const DATES = ['7月31日','8月7日','8月14日','8月21日','8月28日','9月4日','9月10日','9月11日','9月14日','9月15日'];
 const OVERALL = [
   {date:'7月31日', warn:628, now:1472, notset:1645, zhi:2273},
   {date:'8月7日', warn:526, now:1290, notset:1119, zhi:1645},
@@ -189,35 +189,36 @@ const OVERALL = [
   {date:'9月4日', warn:334, now:1362, notset:191, zhi:525},
   {date:'9月10日', warn:137, now:1363, notset:98, zhi:235},
   {date:'9月11日', warn:117, now:1351, notset:63, zhi:180},
-  {date:'9月14日', warn:124, now:1351, notset:55, zhi:179}
+  {date:'9月14日', warn:124, now:1351, notset:55, zhi:179},
+  {date:'9月15日', warn:123, now:1352, notset:27, zhi:150}
 ];
 const BRANCHES = [
-  {name:'恩施', d:[[146,1,135],[136,1,70],[121,1,18],[114,1,25],[135,1,45],[59,1,78],[42,1,31],[41,3,9],[31,3,9]]},
-  {name:'武汉', d:[[9,97,137],[9,98,136],[8,99,133],[8,99,105],[8,102,85],[8,102,85],[2,104,54],[0,104,49],[0,105,41]]},
-  {name:'孝感', d:[[65,204,25],[39,207,8],[13,207,8],[14,207,6],[59,212,4],[58,212,2],[47,212,0],[29,213,0],[32,213,0]]},
-  {name:'神农架', d:[[5,0,16],[5,0,16],[5,0,16],[15,0,16],[36,0,11],[31,0,0],[9,0,0],[13,0,0],[13,0,0]]},
-  {name:'荆门', d:[[4,23,2],[3,23,2],[3,23,2],[5,23,2],[7,23,2],[4,23,2],[8,22,2],[9,8,3],[9,8,3]]},
-  {name:'襄阳', d:[[103,269,204],[103,269,204],[84,288,30],[51,289,14],[81,289,3],[21,290,0],[10,290,1],[10,290,0],[7,289,0]]},
-  {name:'荆州', d:[[120,334,150],[120,334,150],[119,334,148],[113,349,72],[290,352,42],[127,362,0],[6,362,0],[6,362,0],[7,362,0]]},
-  {name:'咸宁', d:[[45,296,358],[9,106,1],[4,106,0],[0,106,0],[34,106,0],[3,112,0],[5,113,0],[5,112,0],[5,112,0]]},
-  {name:'潜江', d:[[0,0,90],[0,0,90],[0,0,90],[0,0,0],[4,0,0],[0,0,0],[2,0,0],[2,0,0],[1,0,0]]},
-  {name:'黄冈', d:[[3,8,12],[3,8,10],[0,8,3],[27,8,3],[52,8,3],[3,8,0],[5,8,0],[2,8,0],[17,8,0]]},
-  {name:'省公司', d:[[0,2,5],[0,2,5],[0,2,5],[0,2,5],[0,2,5],[0,2,5],[0,2,4],[0,2,1],[0,2,1]]},
-  {name:'随州', d:[[6,95,34],[6,95,30],[5,95,29],[6,95,29],[21,95,31],[9,106,18],[0,106,5],[0,106,1],[0,106,1]]},
-  {name:'十堰', d:[[26,2,106],[22,2,83],[1,1,9],[0,1,0],[9,1,0],[0,1,0],[1,0,0],[0,0,0],[0,0,0]]},
-  {name:'天门', d:[[0,27,86],[0,27,86],[0,27,86],[0,27,1],[0,28,0],[0,28,0],[0,28,0],[0,28,0],[0,28,0]]},
-  {name:'宜昌', d:[[57,111,108],[32,115,51],[0,112,1],[0,112,1],[0,112,1],[0,112,1],[0,112,1],[0,112,0],[0,112,0]]},
-  {name:'鄂州', d:[[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0]]},
-  {name:'黄石', d:[[29,0,136],[29,0,136],[29,0,136],[10,0,0],[7,0,0],[11,0,0],[0,0,0],[0,0,0],[2,0,0]]}
+  {name:'恩施', d:[[146,1,135],[136,1,70],[121,1,18],[114,1,25],[135,1,45],[59,1,78],[42,1,31],[41,3,9],[31,3,9],[37,3,9]]},
+  {name:'武汉', d:[[9,97,137],[9,98,136],[8,99,133],[8,99,105],[8,102,85],[8,102,85],[2,104,54],[0,104,49],[0,105,41],[1,105,13]]},
+  {name:'孝感', d:[[65,204,25],[39,207,8],[13,207,8],[14,207,6],[59,212,4],[58,212,2],[47,212,0],[29,213,0],[32,213,0],[29,213,0]]},
+  {name:'神农架', d:[[5,0,16],[5,0,16],[5,0,16],[15,0,16],[36,0,11],[31,0,0],[9,0,0],[13,0,0],[13,0,0],[13,0,0]]},
+  {name:'荆门', d:[[4,23,2],[3,23,2],[3,23,2],[5,23,2],[7,23,2],[4,23,2],[8,22,2],[9,8,3],[9,8,3],[9,8,3]]},
+  {name:'襄阳', d:[[103,269,204],[103,269,204],[84,288,30],[51,289,14],[81,289,3],[21,290,0],[10,290,1],[10,290,0],[7,289,0],[0,289,0]]},
+  {name:'荆州', d:[[120,334,150],[120,334,150],[119,334,148],[113,349,72],[290,352,42],[127,362,0],[6,362,0],[6,362,0],[7,362,0],[9,362,0]]},
+  {name:'咸宁', d:[[45,296,358],[9,106,1],[4,106,0],[0,106,0],[34,106,0],[3,112,0],[5,113,0],[5,112,0],[5,112,0],[5,112,0]]},
+  {name:'潜江', d:[[0,0,90],[0,0,90],[0,0,90],[0,0,0],[4,0,0],[0,0,0],[2,0,0],[2,0,0],[1,0,0],[1,0,0]]},
+  {name:'黄冈', d:[[3,8,12],[3,8,10],[0,8,3],[27,8,3],[52,8,3],[3,8,0],[5,8,0],[2,8,0],[17,8,0],[17,8,0]]},
+  {name:'省公司', d:[[0,2,5],[0,2,5],[0,2,5],[0,2,5],[0,2,5],[0,2,5],[0,2,4],[0,2,1],[0,2,1],[0,2,1]]},
+  {name:'随州', d:[[6,95,34],[6,95,30],[5,95,29],[6,95,29],[21,95,31],[9,106,18],[0,106,5],[0,106,1],[0,106,1],[0,107,1]]},
+  {name:'十堰', d:[[26,2,106],[22,2,83],[1,1,9],[0,1,0],[9,1,0],[0,1,0],[1,0,0],[0,0,0],[0,0,0],[0,0,0]]},
+  {name:'天门', d:[[0,27,86],[0,27,86],[0,27,86],[0,27,1],[0,28,0],[0,28,0],[0,28,0],[0,28,0],[0,28,0],[0,28,0]]},
+  {name:'宜昌', d:[[57,111,108],[32,115,51],[0,112,1],[0,112,1],[0,112,1],[0,112,1],[0,112,1],[0,112,0],[0,112,0],[0,112,0]]},
+  {name:'鄂州', d:[[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0],[0,3,0]]},
+  {name:'黄石', d:[[29,0,136],[29,0,136],[29,0,136],[10,0,0],[7,0,0],[11,0,0],[0,0,0],[0,0,0],[2,0,0],[2,0,0]]}
 ];
-/* 专业(一级专业): d=[[告警,已立项,未立项], ...九期] */
+/* 专业(一级专业): d=[[告警,已立项,未立项], ...十期] */
 const SPEC = [
-  {name:'传输网', d:[[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,0],[0,0,0]]},
-  {name:'局房及基础设施', d:[[3,0,9],[3,0,9],[2,0,7],[2,0,7],[2,0,7],[2,0,7],[1,0,7],[0,0,7],[0,0,7]]},
-  {name:'数据中心', d:[[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1]]},
-  {name:'数据网', d:[[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,1,0]]},
-  {name:'无线网', d:[[32,157,182],[18,159,139],[15,160,132],[6,160,115],[13,163,91],[4,175,74],[10,177,39],[9,177,26],[11,177,19]]},
-  {name:'有线接入网', d:[[593,1315,1450],[505,1131,967],[375,1146,577],[355,1162,153],[728,1171,130],[328,1187,106],[126,1186,48],[108,1174,28],[113,1173,28]]}
+  {name:'传输网', d:[[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,2],[0,0,0],[0,0,0],[0,0,0]]},
+  {name:'局房及基础设施', d:[[3,0,9],[3,0,9],[2,0,7],[2,0,7],[2,0,7],[2,0,7],[1,0,7],[0,0,7],[0,0,7],[0,0,3]]},
+  {name:'数据中心', d:[[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1]]},
+  {name:'数据网', d:[[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,1,0],[0,1,0]]},
+  {name:'无线网', d:[[32,157,182],[18,159,139],[15,160,132],[6,160,115],[13,163,91],[4,175,74],[10,177,39],[9,177,26],[11,177,19],[7,177,3]]},
+  {name:'有线接入网', d:[[593,1315,1450],[505,1131,967],[375,1146,577],[355,1162,153],[728,1171,130],[328,1187,106],[126,1186,48],[108,1174,28],[113,1173,28],[116,1174,20]]}
 ];
 const COLORS = ['#4C72B0','#DD8452','#55A868','#C44E52','#8172B3','#937860'];
 
@@ -266,7 +267,7 @@ const D = {
   metric:'zhi',
   view:'all',
   branch:'all',
-  sortCol:'c14',
+  sortCol:'c15',
   sortDir:'desc',
   charts:{},
 
@@ -297,10 +298,9 @@ const D = {
     const vg = $('view-group');
     if(this.branch !== 'all'){
       const b = BRANCHES.find(x=>x.name===this.branch);
-      const z7 = b.d[7][0]+b.d[7][2];
       const z8 = b.d[8][0]+b.d[8][2];
-      const z6 = b.d[6][0]+b.d[6][2];
-      banner.innerHTML = `<strong>当前查看：${b.name}</strong>　·　整改指标 ${fmt(z8)} 个（9月14日），较9月11日 ${delta(z8-z7)} 个`;
+      const z9 = b.d[9][0]+b.d[9][2];
+      banner.innerHTML = `<strong>当前查看：${b.name}</strong>　·　整改指标 ${fmt(z9)} 个（9月15日），较9月14日 ${delta(z9-z8)} 个`;
       banner.classList.add('show');
       vg.style.display = 'none';
     } else {
@@ -321,29 +321,28 @@ const D = {
     let cards;
     if(this.branch !== 'all'){
       const b = BRANCHES.find(x=>x.name===this.branch);
-      const w=[b.d[0][0],b.d[1][0],b.d[2][0],b.d[3][0],b.d[4][0],b.d[5][0],b.d[6][0],b.d[7][0],b.d[8][0]];
-      const s=[b.d[0][1],b.d[1][1],b.d[2][1],b.d[3][1],b.d[4][1],b.d[5][1],b.d[6][1],b.d[7][1],b.d[8][1]];
-      const n=[b.d[0][2],b.d[1][2],b.d[2][2],b.d[3][2],b.d[4][2],b.d[5][2],b.d[6][2],b.d[7][2],b.d[8][2]];
-      const z=[w[0]+n[0],w[1]+n[1],w[2]+n[2],w[3]+n[3],w[4]+n[4],w[5]+n[5],w[6]+n[6],w[7]+n[7],w[8]+n[8]];
-      const zChg = z[8]-z[7];
-      const zRate = z[7]>0 ? (100*(z[7]-z[8])/z[7]).toFixed(1) : '0.0';
+      const w=[b.d[0][0],b.d[1][0],b.d[2][0],b.d[3][0],b.d[4][0],b.d[5][0],b.d[6][0],b.d[7][0],b.d[8][0],b.d[9][0]];
+      const s=[b.d[0][1],b.d[1][1],b.d[2][1],b.d[3][1],b.d[4][1],b.d[5][1],b.d[6][1],b.d[7][1],b.d[8][1],b.d[9][1]];
+      const n=[b.d[0][2],b.d[1][2],b.d[2][2],b.d[3][2],b.d[4][2],b.d[5][2],b.d[6][2],b.d[7][2],b.d[8][2],b.d[9][2]];
+      const z=[w[0]+n[0],w[1]+n[1],w[2]+n[2],w[3]+n[3],w[4]+n[4],w[5]+n[5],w[6]+n[6],w[7]+n[7],w[8]+n[8],w[9]+n[9]];
+      const zChg = z[9]-z[8];
       cards=[
-        {label:`${b.name} · 整改指标（9月14日）`,value:fmt(z[8]),chg:`较9月11日 ${delta(zChg)}`,cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
+        {label:`${b.name} · 整改指标（9月15日）`,value:fmt(z[9]),chg:`较9月14日 ${delta(zChg)}`,cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
         {label:'一周整改变化',value:delta(zChg),chg:zChg>0?'指标上升':'指标压降',cls:zChg<=0?'good':'bad',bar:zChg<=0?'pos':'neg'},
-        {label:'账外告警（未立项）',value:fmt(w[8]),chg:`较9月11日 ${delta(w[8]-w[7])}`,cls:w[8]<=w[7]?'good':'bad',bar:w[8]<=w[7]?'pos':'neg'},
-        {label:'疑似已账外且未立项',value:fmt(n[8]),chg:`较9月11日 ${delta(n[8]-n[7])}`,cls:n[8]<=n[7]?'good':'bad',bar:n[8]<=n[7]?'pos':'neg'},
-        {label:'疑似已账外且已立项',value:fmt(s[8]),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
-        {label:'累计整改（7.31→9.14）',value:fmt(z[0]-z[8]),chg:'累计压降',cls:'good',bar:'pos'},
+        {label:'账外告警（未立项）',value:fmt(w[9]),chg:`较9月14日 ${delta(w[9]-w[8])}`,cls:w[9]<=w[8]?'good':'bad',bar:w[9]<=w[8]?'pos':'neg'},
+        {label:'疑似已账外且未立项',value:fmt(n[9]),chg:`较9月14日 ${delta(n[9]-n[8])}`,cls:n[9]<=n[8]?'good':'bad',bar:n[9]<=n[8]?'pos':'neg'},
+        {label:'疑似已账外且已立项',value:fmt(s[9]),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
+        {label:'累计整改（7.31→9.15）',value:fmt(z[0]-z[9]),chg:'累计压降',cls:'good',bar:'pos'},
       ];
     } else {
-      const o0=OVERALL[0],o7=OVERALL[7],o8=OVERALL[8];
+      const o0=OVERALL[0],o8=OVERALL[8],o9=OVERALL[9];
       cards=[
-        {label:'当前整改指标（9月14日）',value:fmt(o8.zhi),chg:`较9月11日 ${delta(o8.zhi-o7.zhi)}`,cls:o8.zhi<=o7.zhi?'good':'bad',bar:o8.zhi<=o7.zhi?'pos':'neg'},
-        {label:'一周整改变化',value:delta(o8.zhi-o7.zhi),chg:o8.zhi>o7.zhi?'指标上升':'指标压降',cls:o8.zhi<=o7.zhi?'good':'bad',bar:o8.zhi<=o7.zhi?'pos':'neg'},
-        {label:'账外告警（未立项）',value:fmt(o8.warn),chg:`较9月11日 ${delta(o8.warn-o7.warn)}`,cls:o8.warn<=o7.warn?'good':'bad',bar:o8.warn<=o7.warn?'pos':'neg'},
-        {label:'疑似已账外且未立项',value:fmt(o8.notset),chg:`较9月11日 ${delta(o8.notset-o7.notset)}`,cls:o8.notset<=o7.notset?'good':'bad',bar:o8.notset<=o7.notset?'pos':'neg'},
-        {label:'疑似已账外且已立项',value:fmt(o8.now),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
-        {label:'整改完成（7.31→9.14）',value:fmt(o0.zhi-o8.zhi),chg:'累计压降',cls:'good',bar:'pos'},
+        {label:'当前整改指标（9月15日）',value:fmt(o9.zhi),chg:`较9月14日 ${delta(o9.zhi-o8.zhi)}`,cls:o9.zhi<=o8.zhi?'good':'bad',bar:o9.zhi<=o8.zhi?'pos':'neg'},
+        {label:'一周整改变化',value:delta(o9.zhi-o8.zhi),chg:o9.zhi>o8.zhi?'指标上升':'指标压降',cls:o9.zhi<=o8.zhi?'good':'bad',bar:o9.zhi<=o8.zhi?'pos':'neg'},
+        {label:'账外告警（未立项）',value:fmt(o9.warn),chg:`较9月14日 ${delta(o9.warn-o8.warn)}`,cls:o9.warn<=o8.warn?'good':'bad',bar:o9.warn<=o8.warn?'pos':'neg'},
+        {label:'疑似已账外且未立项',value:fmt(o9.notset),chg:`较9月14日 ${delta(o9.notset-o8.notset)}`,cls:o9.notset<=o8.notset?'good':'bad',bar:o9.notset<=o8.notset?'pos':'neg'},
+        {label:'疑似已账外且已立项',value:fmt(o9.now),chg:'既定事实，不纳入整改',cls:'flat',bar:'neutral'},
+        {label:'整改完成（7.31→9.15）',value:fmt(o0.zhi-o9.zhi),chg:'累计压降',cls:'good',bar:'pos'},
       ];
     }
     $('kpi-row').innerHTML = cards.map(c=>`
@@ -394,16 +393,16 @@ const D = {
 
     let list=[...BRANCHES];
     if(this.branch==='all'){
-      if(this.view==='top'){list=[...BRANCHES].map(b=>({b,d:gv(b,8)-gv(b,7)})).sort((a,x)=>a.d-x.d).slice(0,3).map(x=>x.b);}
-      else if(this.view==='bottom'){list=[...BRANCHES].map(b=>({b,d:gv(b,8)-gv(b,7)})).sort((a,x)=>x.d-a.d).slice(0,3).map(x=>x.b);}
+      if(this.view==='top'){list=[...BRANCHES].map(b=>({b,d:gv(b,9)-gv(b,8)})).sort((a,x)=>a.d-x.d).slice(0,3).map(x=>x.b);}
+      else if(this.view==='bottom'){list=[...BRANCHES].map(b=>({b,d:gv(b,9)-gv(b,8)})).sort((a,x)=>x.d-a.d).slice(0,3).map(x=>x.b);}
     }
-    const sorted=[...list].sort((a,b)=>gv(b,8)-gv(a,8));
+    const sorted=[...list].sort((a,b)=>gv(b,9)-gv(a,9));
     /* Y轴标签嵌入最新期数值，与柱上标注重叠 */
-    const labels=sorted.map(b=>`${b.name}  (${gv(b,8)})`);
+    const labels=sorted.map(b=>`${b.name}  (${gv(b,9)})`);
 
     /* 选中地市高亮，其余半透明 */
     const isSel=sorted.map(b=>this.branch!=='all'&&b.name===this.branch);
-    const c1='#C0392B', c2='#E67E22', c3='#2471A3', c4='#1A5276', c5='#0E3A5C', c6='#08203A', c7='#E74C3C', c8='#7B241C';
+    const c1='#C0392B', c2='#E67E22', c3='#2471A3', c4='#1A5276', c5='#0E3A5C', c6='#08203A', c7='#E74C3C', c8='#7B241C', c9='#5B2C6F';
     const d1=sorted.map(b=>gv(b,0));
     const d2=sorted.map(b=>gv(b,1));
     const d3=sorted.map(b=>gv(b,2));
@@ -413,6 +412,7 @@ const D = {
     const d7=sorted.map(b=>gv(b,6));
     const d8=sorted.map(b=>gv(b,7));
     const d9=sorted.map(b=>gv(b,8));
+    const d10=sorted.map(b=>gv(b,9));
 
     if(this.charts.branch){this.charts.branch.destroy();}
     this.charts.branch=new Chart($('branch-chart'),{type:'bar',
@@ -456,6 +456,11 @@ const D = {
           backgroundColor:isSel.map(s=>s?c8:c8+'77'),
           borderColor:isSel.map(s=>s?c8:c8+'BB'),
           borderWidth:isSel.map(s=>s?2:1),borderRadius:3,
+          barPercentage:0.68,categoryPercentage:0.92},
+        {label:'9月15日',data:d10,
+          backgroundColor:isSel.map(s=>s?c9:c9+'77'),
+          borderColor:isSel.map(s=>s?c9:c9+'BB'),
+          borderWidth:isSel.map(s=>s?2:1),borderRadius:3,
           barPercentage:0.68,categoryPercentage:0.92}
       ]},
       options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
@@ -469,13 +474,13 @@ const D = {
     });
 
     if(this.branch!=='all'){
-      $('branch-title').innerHTML=`各地市整改指标对比<span class="hint">高亮：${this.branch} · 括号内为9月14日值</span>`;
+      $('branch-title').innerHTML=`各地市整改指标对比<span class="hint">高亮：${this.branch} · 括号内为9月15日值</span>`;
     } else if(this.view==='top'){
-      $('branch-title').innerHTML=`整改成效前三名 — 分公司整改指标<span class="hint">按9月14日降序 · 括号内为当前值</span>`;
+      $('branch-title').innerHTML=`整改成效前三名 — 分公司整改指标<span class="hint">按9月15日降序 · 括号内为当前值</span>`;
     } else if(this.view==='bottom'){
-      $('branch-title').innerHTML=`整改较慢后三名 — 分公司整改指标<span class="hint">按9月14日降序 · 括号内为当前值</span>`;
+      $('branch-title').innerHTML=`整改较慢后三名 — 分公司整改指标<span class="hint">按9月15日降序 · 括号内为当前值</span>`;
     } else {
-      $('branch-title').innerHTML=`分公司整改指标（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日 / 9月10日 / 9月11日 / 9月14日）<span class="hint">按9月14日降序 · 括号内为当前值</span>`;
+      $('branch-title').innerHTML=`分公司整改指标（7月31日 / 8月7日 / 8月14日 / 8月21日 / 8月28日 / 9月4日 / 9月10日 / 9月11日 / 9月14日 / 9月15日）<span class="hint">按9月15日降序 · 括号内为当前值</span>`;
     }
   },
 
@@ -484,7 +489,7 @@ const D = {
     const m=this.metric;
     const idx=m==='warn'?0:m==='notset'?2:-1;
     const gv=(b,i)=>idx<0?b.d[i][0]+b.d[i][2]:b.d[i][idx];
-    const rows=[...BRANCHES].map(b=>({name:b.name,d:gv(b,8)-gv(b,7)})).sort((a,b)=>a.d-b.d);
+    const rows=[...BRANCHES].map(b=>({name:b.name,d:gv(b,9)-gv(b,8)})).sort((a,b)=>a.d-b.d);
     const labels=rows.map(r=>r.name);
     const vals=rows.map(r=>r.d);
     const isSel=rows.map(r=>this.branch!=='all'&&r.name===this.branch);
@@ -508,7 +513,7 @@ const D = {
     if(this.branch!=='all'){
       $('delta-title').innerHTML=`一周整改成效排行<span class="hint">高亮：${this.branch}</span>`;
     } else {
-      $('delta-title').innerHTML=`一周整改成效排行（9月11日 → 9月14日 变化）`;
+      $('delta-title').innerHTML=`一周整改成效排行（9月14日 → 9月15日 变化）`;
     }
   },
 
@@ -550,10 +555,11 @@ const D = {
       <th onclick="D.sortBy('c21')">8月21日</th>
       <th onclick="D.sortBy('c28')">8月28日</th>
       <th onclick="D.sortBy('c04')">9月4日</th>
-        <th onclick="D.sortBy('c10')">9月10日</th>
+      <th onclick="D.sortBy('c10')">9月10日</th>
       <th onclick="D.sortBy('c11')">9月11日</th>
       <th onclick="D.sortBy('c14')">9月14日</th>
-      <th onclick="D.sortBy('d14')">周变化（11→14日）</th>
+      <th onclick="D.sortBy('c15')">9月15日</th>
+      <th onclick="D.sortBy('d15')">周变化（14→15日）</th>
       <th>整改成效</th>
     </tr>`;
   },
@@ -568,14 +574,14 @@ const D = {
     const m=this.metric;
     const idx=m==='warn'?0:m==='notset'?2:-1;
     const gv=(b,i)=>idx<0?b.d[i][0]+b.d[i][2]:b.d[i][idx];
-    let rows=BRANCHES.map(b=>({name:b.name,c31:gv(b,0),c07:gv(b,1),c13:gv(b,2),c21:gv(b,3),c28:gv(b,4),c04:gv(b,5),c10:gv(b,6),c11:gv(b,7),c14:gv(b,8),d14:gv(b,8)-gv(b,7)}));
+    let rows=BRANCHES.map(b=>({name:b.name,c31:gv(b,0),c07:gv(b,1),c13:gv(b,2),c21:gv(b,3),c28:gv(b,4),c04:gv(b,5),c10:gv(b,6),c11:gv(b,7),c14:gv(b,8),c15:gv(b,9),d15:gv(b,9)-gv(b,8)}));
 
     if(this.branch!=='all'){
-      rows.sort((a,b)=>b.c14-a.c14);
+      rows.sort((a,b)=>b.c15-a.c15);
     } else if(this.view==='top'){
-      rows.sort((a,b)=>a.d14-b.d14); rows=rows.slice(0,3);
+      rows.sort((a,b)=>a.d15-b.d15); rows=rows.slice(0,3);
     } else if(this.view==='bottom'){
-      rows.sort((a,b)=>b.d14-a.d14); rows=rows.slice(0,3);
+      rows.sort((a,b)=>b.d15-a.d15); rows=rows.slice(0,3);
     } else {
       rows.sort((a,b)=>{
         let va=a[this.sortCol],vb=b[this.sortCol];
@@ -585,16 +591,16 @@ const D = {
     }
 
     $('table-body').innerHTML=rows.map(r=>{
-      const cls=r.d14<=0?'good':'bad';
+      const cls=r.d15<=0?'good':'bad';
       const hl=this.branch===r.name?'highlight':'';
-      const badge=r.d14<=-50?'<span class="badge badge-good">压降明显</span>'
-        :r.d14>0?'<span class="badge badge-bad">指标上升</span>'
-        :r.d14===0?'<span class="badge badge-flat">持平</span>'
+      const badge=r.d15<=-50?'<span class="badge badge-good">压降明显</span>'
+        :r.d15>0?'<span class="badge badge-bad">指标上升</span>'
+        :r.d15===0?'<span class="badge badge-flat">持平</span>'
         :'<span class="badge badge-good">持续压降</span>';
       return `<tr class="${hl}">
         <td>${r.name}</td>
-        <td>${fmt(r.c31)}</td><td>${fmt(r.c07)}</td><td>${fmt(r.c13)}</td><td>${fmt(r.c21)}</td><td>${fmt(r.c28)}</td><td>${fmt(r.c04)}</td><td>${fmt(r.c10)}</td><td>${fmt(r.c11)}</td><td style="font-weight:600">${fmt(r.c14)}</td>
-        <td class="${cls}">${delta(r.d14)}</td><td>${badge}</td></tr>`;
+        <td>${fmt(r.c31)}</td><td>${fmt(r.c07)}</td><td>${fmt(r.c13)}</td><td>${fmt(r.c21)}</td><td>${fmt(r.c28)}</td><td>${fmt(r.c04)}</td><td>${fmt(r.c10)}</td><td>${fmt(r.c11)}</td><td>${fmt(r.c14)}</td><td style="font-weight:600">${fmt(r.c15)}</td>
+        <td class="${cls}">${delta(r.d15)}</td><td>${badge}</td></tr>`;
     }).join('');
 
     if(this.branch!=='all'){
